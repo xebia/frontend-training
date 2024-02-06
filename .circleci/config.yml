@@ -1,0 +1,61 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5.2
+
+executors:
+  pw-jammy-development:
+    docker:
+      - image: mcr.microsoft.com/playwright:v1.41.1-jammy
+
+jobs:
+  build_and_test:
+    executor: node/default
+    steps:
+      - checkout
+      - node/install:
+          node-version: '20.11'
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          command: npm run lint
+          name: Lint
+      - run:
+          command: npm test run -- --coverage
+          name: Run tests
+      - run:
+          command: npm run build
+          name: Build app
+      - run:
+          command: npm run build-storybook
+          name: Build Storybook
+  e2e:
+    executor: pw-jammy-development
+    steps:
+      - checkout
+      - node/install:
+          node-version: '20.11'
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          command: npm run e2e
+          name: Run E2E tests
+  deploy:
+    executor: node/default
+    steps:
+      - run:
+          command: echo "Deploy placeholder"
+          name: Deploy on Netlify
+
+workflows:
+  build_test_deploy:
+    jobs:
+      - build_and_test
+      - e2e
+      - deploy:
+          requires:
+            - build_and_test
+            - e2e
+          filters:
+            branches:
+              only: master

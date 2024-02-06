@@ -1,21 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-
-interface PokemonSummary {
-  name: string;
-  url: string;
-}
-interface PokemonList {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: PokemonSummary[];
-}
+import { PokemonList } from './types';
 
 function App() {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ['list'],
     queryFn: () =>
       fetch('https://pokeapi.co/api/v2/pokemon').then(res => {
+        if (!res.ok) {
+          throw res;
+        }
+
         const list: Promise<PokemonList> = res.json();
         return list;
       }),
@@ -24,7 +18,13 @@ function App() {
   return (
     <>
       <h1>Pokémon</h1>
-      {isLoading ? 'Loading...' : <ul>{data?.results.map(pokemon => <li key={pokemon.url}>{pokemon.name}</li>)}</ul>}
+      {isLoading ? (
+        'Loading...'
+      ) : error ? (
+        'ERROR'
+      ) : (
+        <ul>{data?.results.map(pokemon => <li key={pokemon.url}>{pokemon.name}</li>)}</ul>
+      )}
     </>
   );
 }

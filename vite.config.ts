@@ -15,6 +15,7 @@ export default defineConfig({
         ...configDefaults.exclude,
         'src/main.tsx',
         'src/testUtils.tsx',
+        'src/types.ts',
         'src/*.d.ts',
         'src/**/*.stories.ts',
         'src/**/*.stories.tsx',

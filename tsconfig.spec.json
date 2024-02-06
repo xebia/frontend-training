@@ -7,5 +7,5 @@
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
   "include": ["src", "./vitest-setup.ts", ".storybook/preview.tsx"],
-  "exclude": []
+  "exclude": ["src/mocks", "src/types.ts"]
 }

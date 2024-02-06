@@ -1,5 +1,9 @@
 import type { Preview } from '@storybook/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { initialize, mswLoader } from 'msw-storybook-addon';
+import { handlers } from '../src/mocks/handlers';
+
+initialize();
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,6 +21,7 @@ const preview: Preview = {
       </QueryClientProvider>
     ),
   ],
+  loaders: [mswLoader],
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
@@ -25,6 +30,7 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    msw: { handlers },
   },
 };
 

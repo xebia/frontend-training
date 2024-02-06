@@ -23,6 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
+
 # Vitest
 coverage
 
@@ -31,3 +32,6 @@ coverage
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Storybook
+/storybook-static

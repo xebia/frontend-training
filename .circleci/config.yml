@@ -43,8 +43,16 @@ jobs:
   deploy:
     executor: node/default
     steps:
+      - checkout
+      - node/install:
+          node-version: '20.11'
+      - node/install-packages:
+          pkg-manager: npm
       - run:
-          command: echo "Deploy placeholder"
+          command: npm run netlify build
+          name: Build for Netlify
+      - run:
+          command: npm run netlify deploy -- --prod --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID
           name: Deploy on Netlify
 
 workflows:

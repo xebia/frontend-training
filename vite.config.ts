@@ -11,7 +11,14 @@ export default defineConfig({
     coverage: {
       all: true,
       include: ['src/*.ts', 'src/*.tsx'],
-      exclude: [...configDefaults.exclude, 'src/main.tsx', 'src/*.d.ts', 'src/**/*.stories.ts', 'src/**/*.stories.tsx'],
+      exclude: [
+        ...configDefaults.exclude,
+        'src/main.tsx',
+        'src/testUtils.tsx',
+        'src/*.d.ts',
+        'src/**/*.stories.ts',
+        'src/**/*.stories.tsx',
+      ],
       provider: 'v8',
       reporter: ['html', 'text'],
       thresholds: {

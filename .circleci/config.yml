@@ -1,5 +1,14 @@
 version: 2.1
 
+commands:
+  npm-install:
+    steps:
+      - checkout
+      - node/install:
+          node-version: '20.11'
+      - node/install-packages:
+          pkg-manager: npm
+
 orbs:
   node: circleci/node@5.2
 
@@ -12,11 +21,7 @@ jobs:
   build_and_test:
     executor: node/default
     steps:
-      - checkout
-      - node/install:
-          node-version: '20.11'
-      - node/install-packages:
-          pkg-manager: npm
+      - npm-install
       - run:
           command: npm run lint
           name: Lint
@@ -26,28 +31,27 @@ jobs:
       - run:
           command: npm run build
           name: Build app
+  chromatic:
+    executor: node/default
+    steps:
+      - npm-install
       - run:
           command: npm run build-storybook
           name: Build Storybook
+      - run:
+          command: npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN
+          name: Run Chromatic
   e2e:
     executor: pw-jammy-development
     steps:
-      - checkout
-      - node/install:
-          node-version: '20.11'
-      - node/install-packages:
-          pkg-manager: npm
+      - npm-install
       - run:
           command: npm run e2e
           name: Run E2E tests
   deploy:
     executor: node/default
     steps:
-      - checkout
-      - node/install:
-          node-version: '20.11'
-      - node/install-packages:
-          pkg-manager: npm
+      - npm-install
       - run:
           command: npm run netlify build
           name: Build for Netlify
@@ -59,6 +63,7 @@ workflows:
   build_test_deploy:
     jobs:
       - build_and_test
+      - chromatic
       - e2e
       - deploy:
           requires:

@@ -28,3 +28,12 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+# Known issues
+
+## Error: No CSS for file: /src/styles.css.ts
+At the time of writing the vanilla-extract plugin for vite has an issue when running vitest on Windows, tests may fail with the following error: 
+```
+Error: No CSS for file: /src/styles.css.ts
+```
+You can fix this problem by downgrading `@vanilla-extract/vite-plugin` to version `3.9.5` in [package.json](package.json) and running `npm install` afterwards.

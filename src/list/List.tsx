@@ -1,26 +1,30 @@
 import { Link } from 'react-router-dom';
 import { usePokemonList } from '../api';
+import { card, title } from '../styles.css';
+import { list, listItem, listItemLink } from './List.css';
 
 function List() {
   const { data, isLoading, error } = usePokemonList();
 
   return (
-    <>
-      <h1>Pokémon</h1>
+    <div className={card}>
+      <h1 className={title}>Pokémon</h1>
       {isLoading ? (
         'Loading...'
       ) : error ? (
         'ERROR'
       ) : (
-        <ul>
+        <ul className={list}>
           {data?.results.map(pokemon => (
-            <li key={pokemon.url}>
-              <Link to={pokemon.url.replace('https://pokeapi.co/api/v2', '')}>{pokemon.name}</Link>
+            <li className={listItem} key={pokemon.url}>
+              <Link className={listItemLink} to={pokemon.url.replace('https://pokeapi.co/api/v2', '')}>
+                {pokemon.name}
+              </Link>
             </li>
           ))}
         </ul>
       )}
-    </>
+    </div>
   );
 }
 

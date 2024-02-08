@@ -1,0 +1,15 @@
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+h1 {
+  margin: 0 0 1.25rem;
+}
+
+a {
+  text-decoration: none;
+  color: steelblue;
+}
+a:hover {
+  text-decoration: underline;
+}

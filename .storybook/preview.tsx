@@ -4,6 +4,7 @@ import { initialize, mswLoader } from 'msw-storybook-addon';
 import { handlers } from '../src/mocks/handlers';
 import React from 'react';
 import { withRouter } from 'storybook-addon-react-router-v6';
+import '../src/index.css';
 
 initialize();
 

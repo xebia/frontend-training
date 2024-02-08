@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { PokemonList } from './types';
+import { PokemonList } from '../types';
+import { Link } from 'react-router-dom';
 
-function App() {
+function List() {
   const { data, isLoading, error } = useQuery({
     queryKey: ['list'],
     queryFn: () =>
@@ -23,10 +24,16 @@ function App() {
       ) : error ? (
         'ERROR'
       ) : (
-        <ul>{data?.results.map(pokemon => <li key={pokemon.url}>{pokemon.name}</li>)}</ul>
+        <ul>
+          {data?.results.map(pokemon => (
+            <li key={pokemon.url}>
+              <Link to={pokemon.url.replace('https://pokeapi.co/api/v2', '')}>{pokemon.name}</Link>
+            </li>
+          ))}
+        </ul>
       )}
     </>
   );
 }
 
-export default App;
+export default List;

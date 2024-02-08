@@ -2,6 +2,8 @@ import type { Preview } from '@storybook/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { initialize, mswLoader } from 'msw-storybook-addon';
 import { handlers } from '../src/mocks/handlers';
+import React from 'react';
+import { withRouter } from 'storybook-addon-react-router-v6';
 
 initialize();
 
@@ -20,6 +22,7 @@ const preview: Preview = {
         <Story />
       </QueryClientProvider>
     ),
+    withRouter,
   ],
   loaders: [mswLoader],
   parameters: {

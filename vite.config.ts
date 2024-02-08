@@ -10,9 +10,10 @@ export default defineConfig({
   test: {
     coverage: {
       all: true,
-      include: ['src/*.ts', 'src/*.tsx'],
+      include: ['src/**/*.ts', 'src/**/*.tsx'],
       exclude: [
         ...configDefaults.exclude,
+        'src/mocks',
         'src/main.tsx',
         'src/testUtils.tsx',
         'src/types.ts',

@@ -1,13 +1,13 @@
 import { Meta, StoryObj } from '@storybook/react';
-import App from './App';
+import List from './List';
 import { HttpResponse, http } from 'msw';
 
 const meta = {
-  title: 'App',
-  component: App,
+  title: 'List',
+  component: List,
   parameters: {},
   argTypes: {},
-} satisfies Meta<typeof App>;
+} satisfies Meta<typeof List>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

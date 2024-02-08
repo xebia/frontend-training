@@ -1,12 +1,22 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
-import { TestQueryClientProvider } from './testUtils';
-import { server } from './mocks/node';
+import List from './List';
+import { TestQueryClientProvider } from '../testUtils';
+import { server } from '../mocks/node';
 import { HttpResponse, http } from 'msw';
+import { MemoryRouter } from 'react-router-dom';
 
-describe('App', () => {
+describe('List', () => {
+  const renderComponent = () =>
+    render(<List />, {
+      wrapper: ({ children }) => (
+        <TestQueryClientProvider>
+          <MemoryRouter>{children}</MemoryRouter>
+        </TestQueryClientProvider>
+      ),
+    });
+
   it('should render', async () => {
-    render(<App />, { wrapper: TestQueryClientProvider });
+    renderComponent();
 
     expect(screen.getByRole('heading', { level: 1, name: 'Pokémon' })).toBeInTheDocument();
 
@@ -23,7 +33,7 @@ describe('App', () => {
       })
     );
 
-    render(<App />, { wrapper: TestQueryClientProvider });
+    renderComponent();
 
     expect(await screen.findByText('ERROR')).toBeInTheDocument();
   });

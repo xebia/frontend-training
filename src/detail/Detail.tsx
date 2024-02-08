@@ -1,22 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
-import { Pokemon } from '../types';
 import { useParams } from 'react-router-dom';
+import { usePokemonDetail } from '../api';
 
 function Detail() {
   const id = useParams().id;
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['detail', id],
-    queryFn: () =>
-      fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(res => {
-        if (!res.ok) {
-          throw res;
-        }
-
-        const list: Promise<Pokemon> = res.json();
-        return list;
-      }),
-    enabled: !!id,
-  });
+  const { data, isLoading, error } = usePokemonDetail(id);
 
   return (
     <>

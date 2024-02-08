@@ -1,20 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-import { PokemonList } from '../types';
 import { Link } from 'react-router-dom';
+import { usePokemonList } from '../api';
 
 function List() {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['list'],
-    queryFn: () =>
-      fetch('https://pokeapi.co/api/v2/pokemon').then(res => {
-        if (!res.ok) {
-          throw res;
-        }
-
-        const list: Promise<PokemonList> = res.json();
-        return list;
-      }),
-  });
+  const { data, isLoading, error } = usePokemonList();
 
   return (
     <>

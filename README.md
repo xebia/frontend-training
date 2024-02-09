@@ -28,6 +28,8 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- To run Playwright tests on your development machine you need to set the `NODE_ENV` environment variable to `development` and run `npm run build` to create a development build for Playwright to test. 
+If you don't create a development build the mock service worker will not be included and the e2e tests will fail
 
 # Known issues
 

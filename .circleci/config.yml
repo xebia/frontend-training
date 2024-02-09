@@ -46,6 +46,9 @@ jobs:
     steps:
       - npm-install
       - run:
+          command: NODE_ENV=development npm run build
+          name: Build app for development
+      - run:
           command: npm run e2e
           name: Run E2E tests
   deploy:

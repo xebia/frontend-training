@@ -1,0 +1,7 @@
+:root {
+  --slidev-code-background: rgba(157, 146, 178, 0.2);
+}
+
+pre + pre {
+  margin-top: 4px;
+}

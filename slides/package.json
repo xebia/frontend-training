@@ -1,0 +1,27 @@
+{
+  "name": "slides",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "slidev slides.md --open",
+    "build": "slidev build slides.md",
+    "screenshot": "slidev export slides.md --format png",
+    "export": "slidev export slides.md",
+    "finalize-pdf": "gs -sDEVICE=pdfimage24 -dDownScaleFactor=3 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=slides-final.pdf slides-export.pdf"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@slidev/cli": "^0.47.4",
+    "slidev-component-progress": "^1.0.3"
+  },
+  "slidev": {
+    "addons": [
+      "slidev-component-progress"
+    ]
+  },
+  "devDependencies": {
+    "playwright-chromium": "1.41.2"
+  }
+}
